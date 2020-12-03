@@ -1,0 +1,6 @@
+[submodule "libs/parsedown"]
+	path = libs/parsedown
+	url = https://github.com/erusev/parsedown.git
+[submodule "libs/phpqrcode"]
+	path = libs/phpqrcode
+	url = https://git.code.sf.net/p/phpqrcode/git

@@ -1,0 +1,23 @@
+div#content table.picture {
+    display: inline;
+    border: 0;
+}
+
+div#content table.picture td {
+    padding: 0;
+    border-top: 5px solid transparent;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+div#content table.picture th {
+    padding: 0;
+    border: 0;
+    background: #55AAFF;
+}
+
+div#content table.picture img {
+    max-width: 100%;
+    margin: 0;
+}

@@ -1,0 +1,30 @@
+div#__info_tip__ {
+    border: 1px solid #AAAAAA;
+    background: #9CF;
+    font-size: 15px;
+    display: none;
+    position: absolute;
+    max-width: 80%;
+    z-index: 10;
+}
+
+div#__info_tip__>div:first-child {
+    color: #FFA;
+    background: #18F;
+    font-size: 15px;
+    width: 100%;
+}
+
+div#__info_tip__>div:first-child>div:first-child {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+div#__info_tip__>div:first-child>div:last-child {
+    width: 21px;
+    float: right;
+}
+
+div#__info_tip_body__ {
+    padding: 3px;
+}
