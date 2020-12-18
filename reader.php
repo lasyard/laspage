@@ -21,8 +21,7 @@ abstract class Reader
     protected function _httpHeaders()
     {
         return array(
-            'Content-type: text/html',
-            'Cache-Control: public, max-age=259200',
+            'Cache-Control: no-cache',
         );
     }
 }

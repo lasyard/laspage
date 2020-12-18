@@ -53,6 +53,7 @@ class App extends Base
         });
         define('STREAM_PROTOCOL', 'lasyard');
         stream_wrapper_register(STREAM_PROTOCOL, 'LocalStream');
+        session_cache_limiter('public');
         session_start();
     }
 
@@ -82,7 +83,7 @@ class App extends Base
         $this->tryAddScript('main_' . SCENE);
         $this->addStyle('main');
         $this->tryAddStyle('main_' . SCENE);
-        $this->addStyle('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css');
+        $this->addStyle('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css');
         $node = new Node;
         try {
             while (!empty($path) && $node->isDir) {
@@ -252,6 +253,14 @@ class App extends Base
     public function fileUrl($path)
     {
         return $this->_base . 'file/' . FetchFile::encPath($path);
+    }
+
+    public function enableCache($file)
+    {
+        header('Cache-Control: public, max-age=31536000');
+        $mtime = filemtime($file);
+        header('ETag: "' . $mtime . '"');
+        header('Last-Modified: ' . gmdate(DATE_RFC7231, $mtime));
     }
 
     public function echoFile($code)

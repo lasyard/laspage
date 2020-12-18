@@ -26,14 +26,14 @@ class MdReader extends Reader
     protected function _styles()
     {
         return array(
-            '//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.4.0/build/styles/default.min.css',
+            'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.4.0/build/styles/default.min.css',
         );
     }
 
     protected function _scripts()
     {
         return array(
-            '//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.4.0/build/highlight.min.js',
+            'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.4.0/build/highlight.min.js',
         );
     }
 }

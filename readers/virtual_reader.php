@@ -12,12 +12,4 @@ class VirtualReader extends Reader
     {
         return '<div class="error">' . $this->_text . '</div>' . PHP_EOL;
     }
-
-    protected function _httpHeaders()
-    {
-        return array(
-            'Content-type: text/html',
-            'Cache-Control: no-cache',
-        );
-    }
 }

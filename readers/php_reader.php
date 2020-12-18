@@ -70,12 +70,4 @@ class PhpReader extends Reader
             return $this->_body;
         }
     }
-
-    protected function _httpHeaders()
-    {
-        return array(
-            'Content-type: text/html',
-            'Cache-Control: no-cache',
-        );
-    }
 }

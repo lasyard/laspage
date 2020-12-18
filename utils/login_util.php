@@ -3,7 +3,7 @@ class LoginUtil
 {
     public function __construct($app)
     {
-        $app->addScript('//cdn.jsdelivr.net/npm/crypto.js@2.0.2/index.min.js');
+        $app->addScript('https://cdn.jsdelivr.net/npm/crypto.js@2.0.2/index.min.js');
         $app->addScript('login_util');
     }
 

@@ -9,8 +9,8 @@ class FetchFile
     {
         $ivSize = openssl_cipher_iv_length(self::METHOD);
         return array(
-            str_pad('lasyard', self::KEYLEN, '*'), // key
-            str_pad('lasyard', $ivSize, '+'), // iv
+            str_pad('laspage', self::KEYLEN, '*'), // key
+            str_pad('laspage', $ivSize, '+'), // iv
         );
     }
 
@@ -50,8 +50,8 @@ class FetchFile
             $type = finfo_file($ff, $path);
             finfo_close($ff);
         }
-        header('Cache-Control: public, max-age=259200');
-        header('Content-type: ' . $type);
+        Sys::app()->enableCache($path);
+        header('Content-Type: ' . $type);
         header('Accept-Ranges: bytes');
         header('Accept-Length: ' . filesize($path));
         header('Content-Disposition: attachment; filename="' . basename($path) . '"');
