@@ -234,6 +234,17 @@ class Node extends Base
         return true;
     }
 
+    protected function _newLink($name, $title = '', $info = '')
+    {
+        return array(
+            'title' => empty($title) ? $this->_getTitle($name) : $title,
+            'url' => $this->baseUrl . $name,
+            'selected' => ($this->_name === $name),
+            'isDir' => false,
+            'info' => $info,
+        );
+    }
+
     protected function _genFileLinks()
     {
         $links = array();
@@ -243,13 +254,7 @@ class Node extends Base
                 $restricted[$name] = true;
                 continue;
             }
-            $links[$name] = array(
-                'title' => empty($file['title']) ? $this->_getTitle($name) : $file['title'],
-                'url' => $this->baseUrl . $name,
-                'selected' => false,
-                'isDir' => false,
-                'info' => $file['info'],
-            );
+            $links[$name] = $this->_newLink($name, $file['title'], $file['info']);
         }
         $extraLinks = array();
         foreach ($this->_realFiles as $name => $file) {
@@ -257,19 +262,12 @@ class Node extends Base
                 if (!array_key_exists($name, $links)) continue;
             } else {
                 if (array_key_exists($name, $restricted)) continue;
-                if (!array_key_exists($name, $links)) {
-                    $extraLinks[$name] = array(
-                        'title' => $this->_getTitle($name),
-                        'url' => $name,
-                        'info' => '',
-                        'isDir' => $file['isDir'],
-                        'selected' => ($this->_name == $name),
-                    );
-                    continue;
+                if (array_key_exists($name, $links)) {
+                    $links[$name]['isDir'] = $file['isDir'];
+                } else {
+                    $extraLinks[$name] = $this->_newLink($name);
                 }
             }
-            $links[$name]['isDir'] = $file['isDir'];
-            $links[$name]['selected'] = ($this->_name == $name);
         }
         uasort($extraLinks, function ($a, $b) {
             if ($a['isDir'] && !$b['isDir']) return -1;
