@@ -169,7 +169,7 @@ class App extends Base
         $user = $tbl->selectById($name);
         if (!$user) $this->error("Wrong username or password!");
         $hash = $user['password_hash'];
-        if ($hash === crypt($password, $hash)) {
+        if (hash_equals($hash, crypt($password, $hash))) {
             $_SESSION['user'] = array(
                 'name' => $name,
                 'priv' => explode(',', $user['priv']),
