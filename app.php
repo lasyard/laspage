@@ -93,20 +93,21 @@ class App extends Base
             if (!$node->resolved) $this->redirect($node->baseUrl);
             $node->cook($path);
             $content = $node->content;
+            $httpHeaders = $node->httpHeaders;
+            if (!empty($httpHeaders)) {
+                if (is_array($httpHeaders)) {
+                    foreach ($httpHeaders as $header) header($header);
+                } else {
+                    header($httpHeaders);
+                }
+            }
         } catch (Exception $e) {
             $this->_title = 'Error';
             $this->_info = 'Error';
             $content = Sys::renderHtml('error', array(
                 'message' => $e->getMessage(),
             ));
-        }
-        $httpHeaders = $node->httpHeaders;
-        if (!empty($httpHeaders)) {
-            if (is_array($httpHeaders)) {
-                foreach ($httpHeaders as $header) header($header);
-            } else {
-                header($httpHeaders);
-            }
+            header('Cache-Control: no-cache');
         }
         $this->_baseUrl = $node->baseUrl;
         $this->_isRoot = $node->isRoot;
