@@ -21,7 +21,8 @@ abstract class Reader
     protected function _httpHeaders()
     {
         return array(
-            'Cache-Control: no-cache',
+            'Cache-Control: no-cache, no-store, must-revalidate',
+            'Expires: 0',
         );
     }
 }

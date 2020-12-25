@@ -107,7 +107,8 @@ class App extends Base
             $content = Sys::renderHtml('error', array(
                 'message' => $e->getMessage(),
             ));
-            header('Cache-Control: no-cache');
+            header('Cache-Control: no-cache, no-store, must-revalidate');
+            header('Expires: 0');
         }
         $this->_baseUrl = $node->baseUrl;
         $this->_isRoot = $node->isRoot;
