@@ -84,9 +84,6 @@ class PictureDbUtil
         extract($options);
         $pdu = new PictureDbUtil();
         $pdu->db($dbName);
-        if (isset($titleDbName)) {
-            $pdu->titleDb($titleDbName);
-        }
         if (!empty($_POST)) {
             $pdu->save();
         }

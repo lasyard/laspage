@@ -62,6 +62,23 @@ class LocalStream
         return $this->_c;
     }
 
+    public function stream_set_option(int $option, int $arg1, int $arg2)
+    {
+        switch ($option) {
+            case STREAM_OPTION_BLOCKING:
+                return stream_set_blocking($this->_c, $arg1);
+            case STREAM_OPTION_READ_TIMEOUT:
+                return stream_set_timeout($this->_c, $arg1, $arg2);
+            case STREAM_OPTION_WRITE_BUFFER:
+                if ($arg1 == STREAM_BUFFER_FULL) {
+                    return stream_set_write_buffer($this->_c, $arg2) == 0;
+                } else {
+                    return stream_set_write_buffer($this->c, 0) == 0;
+                }
+        }
+        return false;
+    }
+
     protected function _path($path)
     {
         return str_replace(STREAM_PROTOCOL . '://', DATA_PATH, $path);
