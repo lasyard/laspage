@@ -258,15 +258,14 @@ class Node extends Base
         }
         $extraLinks = array();
         foreach ($this->_realFiles as $name => $file) {
-            if ($this->_exclusive) {
-                if (!array_key_exists($name, $links)) continue;
-            } else {
-                if (array_key_exists($name, $restricted)) continue;
-                if (array_key_exists($name, $links)) {
-                    $links[$name]['isDir'] = $file['isDir'];
-                } else {
-                    $extraLinks[$name] = $this->_newLink($name);
-                }
+            if (array_key_exists($name, $restricted)) {
+                continue;
+            }
+            if (array_key_exists($name, $links)) {
+                $links[$name]['isDir'] = $file['isDir'];
+            } else if (!$this->_exclusive) {
+                $extraLinks[$name] = $this->_newLink($name);
+                $extraLinks[$name]['isDir'] = $file['isDir'];
             }
         }
         uasort($extraLinks, function ($a, $b) {
