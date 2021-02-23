@@ -7,7 +7,7 @@ body {
     background-color: #DEF!important;
     color: #000;
     font-family: Serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.1px;
@@ -54,7 +54,7 @@ div#bar a.sys, div#list a.sys {
 
 div#list, div#list p {
     font-family: Sans-Serif;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
 }
 
@@ -94,27 +94,31 @@ div#content div#main {
     margin-right: 2em;
 }
 
-h2, h3, h4 {
+h2, h3, h4, h5 {
     font-family: Sans-Serif;
 }
 
 h1 {
     font-family: Fantasy;
-    font-size: 40px;
+    font-size: 54px;
     text-align: center;
 }
 
 h2 {
-    font-size: 32px;
-    border-bottom: 1px solid #CCC
+    font-size: 36px;
+    border-bottom: 2px solid #999
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 36px;
 }
 
 h4 {
-    font-size: 18px;
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 16px;
 }
 
 div#info {
