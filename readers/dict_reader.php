@@ -8,7 +8,7 @@ class DictReader extends Reader
         $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($lines as $line) {
             list($key, $value) = explode("\t", $line, 2);
-            $this->_dict[$key] = '<span style="color:magenta">' . $value . '</span>';
+            $this->_dict[$key] =  $value;
         }
     }
 

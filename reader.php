@@ -35,8 +35,8 @@ abstract class Reader
     protected function tr($str)
     {
         $dict = $this->_dict;
-        if (!empty($dict)) {
-            return str_replace(array_keys($dict), array_values($dict), $str);
+        foreach ($dict as $key => $value) {
+            $str = preg_replace("/ *\b$key\b */", '<span style="color:magenta">' . $value . '</span>', $str);
         }
         return $str;
     }
