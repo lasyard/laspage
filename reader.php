@@ -2,6 +2,7 @@
 abstract class Reader
 {
     protected $_cache = array();
+    protected $_dict = array();
 
     public abstract function load($file);
 
@@ -24,5 +25,19 @@ abstract class Reader
             'Cache-Control: no-cache, no-store, must-revalidate',
             'Expires: 0',
         );
+    }
+
+    public function addDict($dict)
+    {
+        $this->_dict = array_merge($this->_dict, $dict);
+    }
+
+    protected function tr($str)
+    {
+        $dict = $this->_dict;
+        if (!empty($dict)) {
+            return str_replace(array_keys($dict), array_values($dict), $str);
+        }
+        return $str;
     }
 }

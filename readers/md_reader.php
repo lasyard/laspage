@@ -14,7 +14,7 @@ class MdReader extends Reader
     {
         $file = $this->_file;
         $parsedown = new Parsedown;
-        $html = $parsedown->text(file_get_contents($file)) . PHP_EOL;
+        $html = $parsedown->text($this->tr(file_get_contents($file))) . PHP_EOL;
         $htmlReader = new HtmlReader;
         $base = substr($file, 0, strrpos($file, '/'));
         $htmlReader->loadStrEnc($base, $html, 'utf-8');

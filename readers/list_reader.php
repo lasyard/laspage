@@ -47,7 +47,8 @@ class ListReader extends Reader
             $info = self::_getDOMAttr($file, 'info');
             $style = self::_getDOMAttr($file, 'style');
             $priv = self::_getDOMAttr($file, 'priv');
-            $r[$name] = compact('title', 'info', 'style', 'priv');
+            $dict = self::_getDOMAttr($file, 'dict');
+            $r[$name] = compact('title', 'info', 'style', 'priv', 'dict');
         }
         return $r;
     }

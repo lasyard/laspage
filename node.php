@@ -55,18 +55,30 @@ class Node extends Base
     public function cook($args)
     {
         $app = Sys::app();
+        $files = $this->_files;
+        $name = $this->_name;
         if ($this->_isDir) {
             $this->_createFileList();
             $realPath = $this->_searchIndexFile();
         } else {
-            $realPath = $this->_realFiles[$this->_name]['realPath'];
+            $realPath = $this->_realFiles[$name]['realPath'];
         }
         $this->_genFileLinks();
         if (isset($realPath)) {
             $this->_genRelatedLinks($realPath);
             $ext = pathinfo($realPath, PATHINFO_EXTENSION);
             $reader = $app->getReader($ext);
-            if ($reader) $reader->load($realPath);
+            if ($reader) {
+                if (isset($files[$name]['dict'])) {
+                    $dicts = explode(',', $files[$name]['dict']);
+                    foreach ($dicts as $dict) {
+                        $dictReader = new DictReader;
+                        $dictReader->load($this->_path . '/' . $dict . '.dict');
+                        $reader->addDict($dictReader->dict);
+                    }
+                }
+                $reader->load($realPath);
+            }
             if ($ext == 'php') $reader->cookArgs($this->_baseUrl, $args);
         }
         if (!isset($reader)) {
@@ -77,8 +89,8 @@ class Node extends Base
         if (!empty($title)) $this->_title = $title;
         $app->title = $this->_title;
         $fileInfo = NULL;
-        if (isset($this->_files[$this->_name])) {
-            $fileInfo = $this->_files[$this->_name]['info'];
+        if (isset($files[$name])) {
+            $fileInfo = $files[$name]['info'];
         }
         $app->info = Sys::renderHtml('info', array(
             'date' => $this->_getDate(),
@@ -87,8 +99,8 @@ class Node extends Base
         if ($reader->styles) {
             foreach ($reader->styles as $style) $app->addStyle($style);
         }
-        if (isset($this->_files[$this->_name]['style'])) {
-            $fileStyle = $this->_files[$this->_name]['style'];
+        if (isset($files[$name]['style'])) {
+            $fileStyle = $files[$name]['style'];
             $app->addStyle($fileStyle);
         }
         if ($reader->scripts) {
